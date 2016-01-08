@@ -18,29 +18,45 @@ export default class Note extends Component {
   }
 
   checkEnter (e) {
-    e.key === 'Enter' ? this.finisEdit(e) : null
+    if (e.key === 'Enter') {
+      this.finishEdit(e);
+    }
   }
+
   edit () {
     this.setState({
       editing: true
     })
   }
+
   finishEdit (e) {
     this.props.onEdit(e.target.value);
-
     this.setState({
       editing: false
     })
   }
-  renderTask () {
-    return <div onClick={this.edit}>{this.props.task}</div>;
+
+  renderDelete () {
+    return <button className="delete" onClick={this.props.onDelete}>x</button>
   }
+
+  renderTask () {
+    const onDelete = this.props.onDelete;
+    //debugger;
+    return (
+      <div onClick={this.edit}>
+        <span className="task">{this.props.task}</span>
+        {onDelete ? this.renderDelete() : null}
+      </div>
+    );
+  }
+
   renderEdit () {
     return <input type="text"
       autoFocus={true}
       defaultValue={this.props.task}
       onBlur={this.finishEdit}
-      onkeyPress={this.checkEnter}/>
+      onKeyPress={this.checkEnter}/>
   }
 
   render () {
