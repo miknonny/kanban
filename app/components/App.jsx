@@ -8,20 +8,7 @@ export default class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      notes: [
-        {
-          id: uuid.v4(),
-          task: 'learn Webpack'
-        },
-        {
-          id: uuid.v4(),
-          task: 'learn React'
-        },
-        {
-          id: uuid.v4(),
-          task: 'Do laundry'
-        }
-      ]
+      notes: []
     }
     this.addNote = this.addNote.bind(this);
     this.editNote = this.editNote.bind(this);
@@ -63,8 +50,10 @@ export default class App extends Component {
       return;
     }
     this.setState({
-      notes: [...notes.slice(0, noteIndex),
-      ...notes.slice(noteIndex + 1)]
+      notes: [
+        ...notes.slice(0, noteIndex),
+        ...notes.slice(noteIndex + 1)
+      ]
     })
   }
 
@@ -72,6 +61,7 @@ export default class App extends Component {
     const { notes } = this.state;
     return (
       <div>
+        <h3>Kanban App</h3>
         <button className="add-note" onClick={this.addNote}>+</button>
         <Notes items={notes}
           onEdit={this.editNote}

@@ -7,7 +7,7 @@ export default class Note extends Component {
     super(props);
 
     this.state = {
-      editing: false
+      editing: true,
     };
 
     this.finishEdit = this.finishEdit.bind(this);
@@ -28,7 +28,7 @@ export default class Note extends Component {
       editing: true
     })
   }
-
+  
   finishEdit (e) {
     this.props.onEdit(e.target.value);
     this.setState({
